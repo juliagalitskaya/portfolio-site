@@ -68,13 +68,40 @@
     position: relative;
   }
 
+  /* HI, I'M YULIA — градиент и медленный перелив */
   header h1 {
     font-family: 'Space Mono', monospace;
     font-size: 3rem;
     margin-bottom: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #ced5ff;
+    position: relative;
+    color: transparent;
+  }
+
+  header h1::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      #6c8cff,
+      #ff8bf5,
+      #ffe66d,
+      #ffffff,
+      #6c8cff
+    );
+    background-size: 320% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: slowShimmer 10s linear infinite;
+  }
+
+  @keyframes slowShimmer {
+    0%   { background-position: 220% 0; }
+    50%  { background-position: 20% 0; }
+    100% { background-position: -220% 0; }
   }
 
   header p {
@@ -103,6 +130,46 @@
     transform: translateY(-1px);
     background: linear-gradient(120deg, #6c8cff, #ffb86c);
     box-shadow: 0 14px 28px rgba(0,0,0,0.65);
+  }
+
+  /* маленький терминал-код в левом верхнем углу */
+  .hero-code {
+    position: absolute;
+    top: 28px;
+    left: 12px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    white-space: pre;
+    pointer-events: none;
+    max-width: 60vw;
+    text-align: left;
+    opacity: 0.45;
+    color: transparent;
+    background: linear-gradient(
+      120deg,
+      #6c8cff,
+      #ff8bf5,
+      #ffe66d,
+      #ffffff,
+      #6c8cff
+    );
+    background-size: 260% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: codeShimmer 8s linear infinite;
+  }
+
+  @keyframes codeShimmer {
+    0%   { background-position: 220% 0; opacity: 0.3; }
+    50%  { background-position: 60% 0;  opacity: 0.45; }
+    100% { background-position: -160% 0; opacity: 0.3; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-code {
+      display: none;
+    }
   }
 
   /* scroll arrow */
@@ -445,7 +512,9 @@
 <body>
 
 <header>
-  <h1>HI, I'M YULIA</h1>
+  <div class="hero-code"></div>
+
+  <h1 data-text="HI, I'M YULIA">HI, I'M YULIA</h1>
   <p>Web Developer & Designer — I create modern websites from concept and UI to production-ready code.</p>
   <a href="#portfolio" class="btn">See My Work</a>
 
@@ -563,6 +632,46 @@
 </div>
 
 <script>
+  // typewriter для hero-code
+  const codeEl = document.querySelector('.hero-code');
+  const codeLines = [
+  "  <h1>Hi, I'm Yulia</h1>",
+  "  <p>Web developer & designer for modern, clean websites.</p>",
+  "  <button>Let’s build your site</button>",
+];
+
+  let lineIndex = 0;
+  let charIndex = 0;
+
+  function typeCode() {
+    if (!codeEl) return;
+
+    if (lineIndex >= codeLines.length) {
+      setTimeout(() => {
+        codeEl.textContent = "";
+        lineIndex = 0;
+        charIndex = 0;
+        typeCode();
+      }, 1000);
+      return;
+    }
+
+    const currentLine = codeLines[lineIndex];
+
+    if (charIndex < currentLine.length) {
+      codeEl.textContent += currentLine[charIndex];
+      charIndex++;
+      setTimeout(typeCode, 30);
+    } else {
+      codeEl.textContent += "\n";
+      lineIndex++;
+      charIndex = 0;
+      setTimeout(typeCode, 120);
+    }
+  }
+
+  typeCode();
+
   // reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
