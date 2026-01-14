@@ -374,14 +374,59 @@
   .client-stat-number {
     font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 4px;
+    margin-bottom: 0;
   }
 
+  /* UPDATED: label styling (no grey, no caps, more spacing) */
   .client-stat-label {
-    font-size: 0.85rem;
-    color: var(--muted-text);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    margin-top: 12px;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.92);
+    letter-spacing: 0.02em;
+    text-transform: none;
+    line-height: 1.35;
+  }
+
+  /* UPDATED: flow row + note (not grey, but clearly secondary) */
+  .clients-flow {
+    max-width: 980px;
+    margin: -18px auto 18px;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.98rem;
+    color: rgba(255,255,255,0.78);
+    letter-spacing: 0.02em;
+    line-height: 1.45;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .clients-flow .step {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+  }
+
+  .clients-flow .arrow {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.95rem;
+  }
+
+  .clients-note {
+    max-width: 720px;
+    margin: 8px auto 26px;
+    text-align: center;
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.5;
   }
 
   /* Contact */
@@ -507,6 +552,15 @@
       max-height: 70vh;
     }
   }
+#clients{
+  padding-bottom: 35px;
+}
+#contact{
+  padding-top: 35px;
+}
+#contact .section-intro{
+  color: rgba(255,255,255,0.68);
+}
 </style>
 </head>
 <body>
@@ -586,21 +640,23 @@
 </section>
 
 <section id="clients" class="reveal">
-  <h2>Clients & Stats</h2>
-  <div class="clients-wrap">
-    <div class="client-stat">
-      <div class="client-stat-number">5+</div>
-      <div class="client-stat-label">Years of Experience</div>
-    </div>
-    <div class="client-stat">
-      <div class="client-stat-number">50+</div>
-      <div class="client-stat-label">Web Projects Delivered</div>
-    </div>
-    <div class="client-stat">
-      <div class="client-stat-number">99%</div>
-      <div class="client-stat-label">Client Satisfaction</div>
-    </div>
+  <h2>How I build your website</h2>
+
+  <div class="clients-flow">
+    <span class="step">Website structure</span>
+    <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+    <span class="step">UI/UX design</span>
+    <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+    <span class="step">Responsive layout</span>
+    <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+    <span class="step">Website development</span>
   </div>
+
+  <div class="clients-note">
+    Design-only, development-only, or full website delivery (design + code).
+  </div>
+
+  
 </section>
 
 <section id="contact" class="reveal">
